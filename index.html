@@ -7,49 +7,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
     <script src="./js/components/Tweet.js" defer></script>
     <script src="./js/app.js" defer></script>
     <title>Vue app</title>
 </head>
 
-<body class="container">
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <div id="app">
-        <h1>VUE APP</h1>
-        <div class="user">
-            <div class="user-information">
-                <div class="image-container">
-                    <img src="https://freesvg.org/img/abstract-user-flat-4.png" width="100rem" alt="profile picture">
+    <main>
+        <div id="app">
+            <h1>VUE APP</h1>
+            <div class="user">
+                <div>
+                    <div>
+                        <img src="https://freesvg.org/img/abstract-user-flat-4.png" width="100rem"
+                            alt="profile picture">
+                    </div>
                 </div>
-                <h3>{{ username }}</h3>
+                <div class="user__text">
+                    <h3>{{ username }}</h3>
+
+                    <div v-if="bio">
+                        <p><strong>Bio: </strong>{{ bio }}</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="user-bio" v-if="bio">
-                <em>Bio: </em> {{ bio }}
+            <div class="tweets">
+                <tweet v-for="tweet in tweets" v-bind:message="tweet" v-bind:author="username"></tweet>
+            </div>
+
+            <div>
+                <h2>Settings</h2>
+                <form>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input name="username" type="text" class="form-control" id="username"
+                            aria-describedby="username" value="username" placeholder="Username" v-model="username" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea name="bio" class="form-control" id="bio" value="bio" placeholder="Bio" v-model="bio">
+                    </textarea>
+                    </div>
+
+                    <div class="mb-3 new-tweet">
+                        <label for="tweet" class="form-label">New Tweet</label>
+                        <input name="tweet" type="text" class="form-control" id="tweet" value="tweet"
+                            placeholder="New Tweet" v-model="newTweet" />
+                    </div>
+                    <a v-on:click="tweets.push(newTweet)" class="btn btn-primary">
+                        Add Tweet
+                    </a>
+                </form>
             </div>
         </div>
-
-        <div class="tweets">
-            <tweet v-for="tweet in tweets" v-bind:message="tweet" v-bind:author="username"></tweet>
         </div>
-
-        <div class="settings">
-            <h2>Settings</h2>
-            <label for="username">Username</label>
-            <input type="text" value="username" placeholder="Username" v-model="username" />
-
-            <label for="bio">Bio</label>
-            <textarea value="bio" placeholder="Bio" v-model="bio"></textarea>
-
-            <label for="tweet">New Tweet</label>
-            <div class="new-tweet">
-                <input type="text" value="tweet" placeholder="New Tweet" v-model="newTweet" />
-                <button v-on:click="tweets.push(newTweet)">Add Tweet</button>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">

@@ -42,11 +42,12 @@
 
             <div>
                 <h2>Settings</h2>
-                <form>
+                <form action="" method="">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input name="username" type="text" class="form-control" id="username"
-                            aria-describedby="username" value="username" placeholder="Username" v-model="username" />
+                            aria-describedby="username" value="username" placeholder="Username" v-model="username"
+                            required />
                     </div>
 
                     <div class="mb-3">
@@ -58,11 +59,9 @@
                     <div class="mb-3 new-tweet">
                         <label for="tweet" class="form-label">New Tweet</label>
                         <input name="tweet" type="text" class="form-control" id="tweet" value="tweet"
-                            placeholder="New Tweet" v-model="newTweet" />
+                            placeholder="New Tweet" v-model="newTweet" required />
                     </div>
-                    <a v-on:click="tweets.push(newTweet)" class="btn btn-primary">
-                        Add Tweet
-                    </a>
+                    <input type="button" value="Add Tweet" v-on:click="tweets.push(newTweet)" class="btn btn-primary" id="button" />
                 </form>
             </div>
         </div>

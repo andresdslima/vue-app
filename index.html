@@ -1,76 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-    <script src="./js/components/Tweet.js" defer></script>
-    <script src="./js/app.js" defer></script>
-    <title>Vue app</title>
+    <title>Beer App</title>
 </head>
 
 <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+        <strong>We're sorry but Beer App doesn't work properly without JavaScript enabled.
+            Please enable it to continue.</strong>
+    </noscript>
 
-    <main>
-        <div id="app">
-            <h1>VUE APP</h1>
-            <div class="user">
-                <div>
-                    <div>
-                        <img src="https://freesvg.org/img/abstract-user-flat-4.png" width="100rem"
-                            alt="profile picture">
-                    </div>
+    <div id="app">
+        <a href="#">
+            <img id="logo" alt="Beers logo" src="./assets/beers-logo.png" />
+        </a>
+
+        <div class="col-md-6" style="margin: 0 auto; padding: 1rem">
+            <h2 style="text-align: center; margin: 0 auto">Search Beers</h2>
+            <form @submit.prevent="getData">
+                <div class="beerFilters">
+                    <label class="form-control" for="beerName">Beer name contains</label>
+                    <input type="text" class="form-control" v-model.trim="beerName" name="beerName"
+                        placeholder="Example: Punk_IPA" />
                 </div>
-                <div class="user__text">
-                    <h3>{{ username }}</h3>
 
-                    <div v-if="bio">
-                        <p><strong>Bio: </strong>{{ bio }}</p>
-                    </div>
+                <div class="beerFilters">
+                    <label class="form-control" for="abv">ABV greater than</label>
+                    <input type="number" class="form-control" v-model.number="beerABV" name="abv"
+                        placeholder="Example: 1, 2, 3" />
+                    <small>"Alcohol By Volume (ABV)"</small>
                 </div>
-            </div>
 
-            <div class="tweets">
-                <tweet v-for="tweet in tweets" v-bind:message="tweet" v-bind:author="username"></tweet>
-            </div>
+                <input type="submit" class="btn-primary" style="display: block; margin: 1rem auto" value="Submit"
+                    id="buttonSubmit" />
+            </form>
 
-            <div>
-                <h2>Settings</h2>
-                <form action="" method="">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input name="username" type="text" class="form-control" id="username"
-                            aria-describedby="username" value="username" placeholder="Username" v-model="username"
-                            required />
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="bio" class="form-label">Bio</label>
-                        <textarea name="bio" class="form-control" id="bio" value="bio" placeholder="Bio" v-model="bio">
-                    </textarea>
-                    </div>
-
-                    <div class="mb-3 new-tweet">
-                        <label for="tweet" class="form-label">New Tweet</label>
-                        <input name="tweet" type="text" class="form-control" id="tweet" value="tweet"
-                            placeholder="New Tweet" v-model="newTweet" required />
-                    </div>
-                    <input type="button" value="Add Tweet" v-on:click="tweets.push(newTweet)" class="btn btn-primary" id="button" />
-                </form>
-            </div>
+            <ul class="list-group">
+                <li v-for="(item, index) in data" class="list-group-item">
+                    {{ index + 1 }}. {{ item.name }}; ABV: {{ item.abv}}.
+                </li>
+            </ul>
         </div>
-        </div>
-    </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

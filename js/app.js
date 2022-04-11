@@ -8,7 +8,7 @@ const appComponent = {
     },
     methods: {
         async getData() {
-            await axios.get(`https://api.punkapi.com/v2/beers?beer_name=${this.beerName}&abv_get=${this.beerABV}`)
+            await axios.get(`https://api.punkapi.com/v2/beers?beer_name=${this.beerName}&abv_gt=${this.beerABV}`)
                 .then(response => this.data = response.data)
                 .catch(error => console.log(error))
         }

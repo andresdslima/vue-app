@@ -13,32 +13,10 @@ html {
 body {
     min-height: 100vh;
     margin: 1rem 15rem;
-    /* background-color: rgb(42, 124, 172); */
 }
 
-.user {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.user__text {
-    display: flex;
-    flex-direction: column;
-}
-
-.tweet {
-    background-color: rgb(33, 148, 163);
-    border-radius: 15px;
-    padding: 0.5rem;
-    margin: 1rem 0;
-    transition: all 0.3s ease;
-}
-
-.tweet:hover {
-    color: #fff;
-    transform: scale(1.05);
+label {
+    border: none !important;
 }
 
 #buttonSubmit {
@@ -50,20 +28,8 @@ body {
     transform: scale(1.1);
 }
 
-label {
-    border: none !important;
-}
-
 @media only screen and (max-width: 900px) {
-    * {
-        text-align: center;
-    }
-
     body {
         margin: 2rem 5rem;
-    }
-
-    .user {
-        flex-direction: column;
     }
 }
